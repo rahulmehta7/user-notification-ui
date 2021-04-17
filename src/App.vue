@@ -1,12 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Login</router-link> |
-      <router-link to="/about">About</router-link>
+    <div v-if="isUserLogin" id="nav">
+      <router-link to="/"></router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+
+export default {
+  name: 'App',
+  computed: {
+    isUserLogin()
+    {
+      let token = localStorage.getItem("samauthToken");  
+      if(token)
+      {
+        return false;
+      }    
+      return true;
+    }
+  },
+}
+</script>
 
 <style>
 #app {
