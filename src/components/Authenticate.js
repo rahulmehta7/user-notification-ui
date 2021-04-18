@@ -1,5 +1,6 @@
 import mockUsers from '../../public/data/users'
 import mockInvitations from '../../public/data/invitations'
+import mockInvitationsUpdate from '../../public/data/invitations_update'
 
 export async function authenticateUser(userName, password) {
     if(mockUsers.users.find(user => {
@@ -15,7 +16,7 @@ export async function authenticateUser(userName, password) {
     }              
 }
 
-export async function fetchUserNotification() {
+export async function fetchUserNotification(update) {
     let token = localStorage.getItem("samauthToken");
     let splitToken = token.split('_');
     let userName = splitToken[0]
@@ -26,9 +27,17 @@ export async function fetchUserNotification() {
     let userInvites = [];
     if(user)
     {
-        userInvites = mockInvitations.invites.filter((invite) => {
-            return (invite.user_id == user.user_id)
-    }) 
+        if(!update)
+        {
+            userInvites = mockInvitations.invites.filter((invite) => {
+                return (invite.user_id == user.user_id)    
+            }) 
+        }
+        else {
+            userInvites = mockInvitationsUpdate.invites.filter((invite) => {
+                return (invite.user_id == user.user_id)    
+            })             
+        }
     }   
 
     return userInvites;    

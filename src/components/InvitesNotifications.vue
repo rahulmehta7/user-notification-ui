@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div v-for="invite in invites" :key="invite.invite_id">
+    <div v-for="invite in getInvites" :key="invite.invite_id">
       <div class="invites-notification">
         <b-notification
             :type="getType(invite)"
@@ -29,17 +29,25 @@ export default {
   props: {
   },
   async mounted() {
-    await this.getUserInvites()
+    await this.getUserInvites();
   },
   
   computed: {
-
+    getInvites()
+    {
+      return this.invites;
+    }
   },
   methods: {
     async getUserInvites()
     {
-      this.invites =  await fetchUserNotification();
+      this.invites =  await fetchUserNotification(false);   
+      const self = this; 
+      setTimeout(() => { self.getUpdatedInvites() }, 3000);
       return;      
+    },
+    async getUpdatedInvites(){
+      this.invites =  await fetchUserNotification(true);    
     },
     getType(invite)
     {
@@ -51,15 +59,8 @@ export default {
     }    
   },
 }
-
-
-
-
 </script>
 
-
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .invites-notification
 {

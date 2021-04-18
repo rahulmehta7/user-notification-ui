@@ -1,10 +1,7 @@
 <template>
   <div class="home-view">
-    <div>
-      <h1 class="home-view-header">Welcome to Notification Dashboard      
-      </h1>      
-      <b-button class="" type="is-primary" @click="logoutUser()">Logout</b-button>
-    </div>
+    <b-button class="home-view-button" type="is-primary" @click="logoutUser()">Logout</b-button>
+    <h1 class="home-view-header">Welcome to Notification Dashboard</h1>      
     <InvitesNotifications/>
   </div>
 </template>
@@ -37,12 +34,12 @@ export default {
 
 .home-view-header{
   font-size: 3em;
-  margin: 1em;
+  margin-bottom: 1em;
 }
 
 .home-view-button{
+  margin-left: auto;
+  margin-right: 1em;
   margin-top: 1em;
-  margin-left: 20em
 }
-
 </style>
