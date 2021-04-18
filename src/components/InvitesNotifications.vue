@@ -65,7 +65,6 @@ export default {
 .invites-notification
 {
   margin-bottom: 2em;
-  width: 50em;
 }
 .invites-text-align{
   text-align: left;
